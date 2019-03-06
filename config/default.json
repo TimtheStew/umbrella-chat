@@ -1,0 +1,19 @@
+{
+    "version": "000000",
+    "port": 8080,
+    "projectId": "umbrella-chat",
+    "host": "localhost",
+    "protocol": "http",
+    "enableGraphQLMocking": false,
+    "enableGraphiql": true,
+    "debug": true,
+    "secureGraphQL": false,
+    "jwt": {
+        "secret":",,cfcLqqBJ7)OCkQiN-y:Gb+iy%XaWq9E7^sQ,uVarF>AKfde)T77:N)f!crIc.p",
+        "expiresIn": "30 days"
+    },
+    "logging": {
+        "logLevel": "debug",
+        "includeSrc": "false" // Whether to include the src line info with each logging call
+    }
+}
