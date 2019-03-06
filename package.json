@@ -1,0 +1,47 @@
+{
+  "name": "umbrella-chat",
+  "version": "1.0.0",
+  "description": "Encrypted chat for you, and your squad.",
+  "main": "server/index.js",
+  "scripts": {
+    "lint": "standard",
+    "test": "npm run lint && npm run test:server",
+    "test:server": "jest --config=server.jest.config.json",
+    "watch": "nodemon server/main.js | bunyan -o short",
+    "standard": "standard --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimtheStew/umbrella-chat.git"
+  },
+  "keywords": [
+    "umbrella"
+  ],
+  "author": "Timothy R. Stewart",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TimtheStew/umbrella-chat/issues"
+  },
+  "homepage": "https://github.com/TimtheStew/umbrella-chat#readme",
+  "dependencies": {
+    "apollo-server-express": "^2.4.8",
+    "app-root-path": "^2.1.0",
+    "bunyan": "^1.8.12",
+    "config": "^3.0.1",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "graphql": "^14.1.1",
+    "graphql-tools": "^4.0.4",
+    "jest": "^21.2.1",
+    "jest-json-reporter": "^1.2.2",
+    "jsonwebtoken": "^8.5.0",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.10",
+    "pg": "^7.8.1",
+    "sequelize": "^4.43.0",
+    "shortid": "^2.2.14"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1"
+  }
+}

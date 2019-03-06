@@ -1,0 +1,18 @@
+{
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text"
+    ],
+    "collectCoverageFrom": [
+      "server/**/*.{js}",
+      "!server/datamodel/**/*.{js}",
+      "!server/schema/*.{js}",
+      "server/schema/schemaHelper.{js}"
+    ],
+    "coverageDirectory": "server_coverage",
+    "testMatch": [
+      "<rootDir>/server/**/?(*.)(spec|test).{js}"
+    ],
+    "testEnvironment": "node"
+}
