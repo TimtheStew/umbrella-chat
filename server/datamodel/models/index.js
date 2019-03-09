@@ -20,12 +20,8 @@ let loggingConfig = { logging: (msg) => {
   rootCtx.logger.debug(msg)
 } }
 
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], loggingConfig)
-} else {
-  let c = Object.assign(config, loggingConfig)
-  sequelize = new Sequelize(config.database, config.username, config.password, c)
-}
+let c = Object.assign(config, loggingConfig)
+sequelize = new Sequelize(config.database, config.username, config.password, c)
 
 fs
   .readdirSync(__dirname)
