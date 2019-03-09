@@ -19,6 +19,14 @@ module.exports = {
             key: 'id'
           }
         },
+        chatId: {
+          type: Sequelize.UUID,
+          allowNull: false,
+          references: {
+            model: 'Users',
+            key: 'id'
+          }
+        },
         createdAt: {
           allowNull: false,
           type: Sequelize.DATE

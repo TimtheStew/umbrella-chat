@@ -33,6 +33,14 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: true
             }
         })
+
+        // Message - 1:1 -> Chat
+        Message.belongsTo(models.User, {
+          as: 'chat',
+          foreignKey: {
+              allowNull: true
+          }
+      })
     }
 
   return Message
