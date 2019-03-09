@@ -10,7 +10,7 @@ module.exports = {
           primaryKey: true,
           type: Sequelize.UUID
         },
-        publicKey: Sequelize,
+        publicKey: Sequelize.STRING,
         gId: Sequelize.STRING,
         firstName: Sequelize.STRING,
         lastName: Sequelize.STRING,
