@@ -14,6 +14,6 @@
     },
     "logging": {
         "logLevel": "debug",
-        "includeSrc": "false" // Whether to include the src line info with each logging call
+        "includeSrc": "false"
     }
 }

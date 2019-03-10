@@ -8,7 +8,9 @@
     "test": "npm run lint && npm run test:server",
     "test:server": "jest --config=server.jest.config.json",
     "watch": "nodemon server/main.js | bunyan -o short",
-    "standard": "standard --fix"
+    "standard": "standard --fix",
+    "migrate": "sequelize db:migrate",
+    "seed": "sequelize db:seed:all"
   },
   "repository": {
     "type": "git",
@@ -37,8 +39,11 @@
     "jsonwebtoken": "^8.5.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.10",
-    "pg": "^7.8.1",
+    "path": "^0.12.7",
+    "pg": "^7.8.2",
+    "pg-hstore": "^2.3.2",
     "sequelize": "^4.43.0",
+    "sequelize-cli": "^5.4.0",
     "shortid": "^2.2.14"
   },
   "devDependencies": {
