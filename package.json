@@ -11,8 +11,8 @@
     "standard": "standard --fix",
     "migrate": "sequelize db:migrate",
     "seed": "sequelize db:seed:all",
-    "client-start": "webpack-dev-server --mode development --open",
-    "client-build": "webpack --mode production"
+    "client-start": "webpack-dev-server --config ./config/app/webpack.config.js --mode development --open",
+    "client-build": "webpack --config ./config/app/webpack.config.js --mode production"
   },
   "repository": {
     "type": "git",
@@ -52,12 +52,16 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
+    "acorn": "^6.1.1",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^2.1.1",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
