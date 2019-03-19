@@ -10,7 +10,9 @@
     "watch": "nodemon server/main.js | bunyan -o short",
     "standard": "standard --fix",
     "migrate": "sequelize db:migrate",
-    "seed": "sequelize db:seed:all"
+    "seed": "sequelize db:seed:all",
+    "client-start": "webpack-dev-server --config ./config/app/webpack.config.js --mode development --open",
+    "client-build": "webpack --config ./config/app/webpack.config.js --mode production"
   },
   "repository": {
     "type": "git",
@@ -42,11 +44,31 @@
     "path": "^0.12.7",
     "pg": "^7.8.2",
     "pg-hstore": "^2.3.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
     "sequelize": "^4.43.0",
     "sequelize-cli": "^5.4.0",
     "shortid": "^2.2.14"
   },
   "devDependencies": {
-    "standard": "^12.0.1"
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "acorn": "^6.1.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^2.1.1",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "standard": "^12.0.1",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
   }
 }
