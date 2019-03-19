@@ -1,7 +1,7 @@
 'use strict'
 
 require('dotenv').config()
-const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
+const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')  
 const bodyParser = require('body-parser')
 const config = require('config')
 const shortid = require('shortid')
