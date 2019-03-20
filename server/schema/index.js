@@ -39,11 +39,11 @@ const schema = new ApolloServer({
       MessageResolver
     ),
     playground: {
-      endpoint: 'http://localhost:4000/graphql',
+      endpoint: 'http://localhost:8080/graphql',
       settings: {
         'editor.theme' : 'light'
       }
     }
   })
-  
+
 module.exports = schema
