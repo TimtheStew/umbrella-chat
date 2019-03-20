@@ -1,20 +1,14 @@
 'use strict'
 
 require('dotenv').config()
-const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
-const bodyParser = require('body-parser')
+const schema = require('./schema/index.js')  
 const config = require('config')
 const shortid = require('shortid')
 const express = require('express')
 const morgan = require('morgan')
 const { verifyAuthHeader } = require('./lib/token')
-const schema = require('./schema')
 
 const app = express()
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({
-  extended: true
-}))
 
 let ctx = require('./rootCtx')
 ctx = ctx.child({ DataLayer: require('./datamodel/models') })
@@ -39,21 +33,9 @@ app.use(morgan(':method :url :status :reqId :response-time ms', {
 // configure all routes
 app.use(require('./routes'))
 
-// configure graphql
-const myGraphQLSchema = schema(ctx)
-app.use('/graphql', verifyAuthHeader, graphqlExpress((request) => {
-  return {
-    schema: myGraphQLSchema,
-    context: request.context
-  }
-}))
-
-if (config.enableGraphiql) {
-  app.use('/graphiql', graphiqlExpress({
-    endpointURL: '/graphql',
-    passHeader: "'Authorization': 'Bearer ' + localStorage['token']"
-  }))
-}
+schema.applyMiddleware({
+  app: app
+});
 
 app.use('/app', express.static('./client'))
 

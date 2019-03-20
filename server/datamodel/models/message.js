@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID
     },
     body: DataTypes.STRING,
+    chatId: DataTypes.STRING,
     createdAt: {
       type: DataTypes.DATE,
       get () {
@@ -33,14 +34,6 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: true
             }
         })
-
-        // Message - 1:1 -> Chat
-        Message.belongsTo(models.User, {
-          as: 'chat',
-          foreignKey: {
-              allowNull: true
-          }
-      })
     }
 
   return Message

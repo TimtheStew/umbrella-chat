@@ -4,13 +4,13 @@ const {isDate} = require('lodash')
 module.exports = (sequelize, DataTypes) => {
   const Chat = sequelize.define('Chat', {
     id: {
-        allowNull: false,
-        defaultValue: DataTypes.UUIDV4,
-        primaryKey: true,
-        type: DataTypes.UUID
+      allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      type: DataTypes.UUID
     },
     name: DataTypes.STRING,
-    users: DataTypes.JSON,
+    users: DataTypes.ARRAY(DataTypes.JSON),
     createdAt: {
       type: DataTypes.DATE,
       get () {

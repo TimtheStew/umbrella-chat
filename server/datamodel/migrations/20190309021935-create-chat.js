@@ -11,7 +11,7 @@ module.exports = {
           type: Sequelize.UUID
         },
         name: Sequelize.STRING,
-        users: Sequelize.JSON,
+        users: Sequelize.ARRAY(Sequelize.JSON),
         createdAt: {
           allowNull: false,
           type: Sequelize.DATE
