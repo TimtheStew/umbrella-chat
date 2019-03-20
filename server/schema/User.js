@@ -1,8 +1,8 @@
 
 'use strict'
 
+const { gql } = require('apollo-server-express')
 const PageInfo = require('./PageInfo')
-
 const {generateOrderByEnum, fieldsToCondition} = require('./schemaHelper')
 
 const UserInputFields = `
@@ -23,7 +23,7 @@ const UserFields = `
   updatedAt: String
 `
 
-const User = `
+const User = gql`
   type User {
     ${UserFields}
   }

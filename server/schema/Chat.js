@@ -1,6 +1,7 @@
 
 'use strict'
 
+const { gql } = require('apollo-server-express')
 const {generateOrderByEnum, fieldsToCondition} = require('./schemaHelper')
 
 const ChatFields = `
@@ -16,7 +17,6 @@ const ChatInputFields = `
 `
 
 const Chat = gql`
-
   type Chat {
     ${ChatFields}
   }

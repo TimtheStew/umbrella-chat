@@ -1,4 +1,6 @@
 'use strict'
+
+const { gql } = require('apollo-server-express')
 const User = require('./User')
 const {generateOrderByEnum, fieldsToCondition} = require('./schemaHelper')
 
