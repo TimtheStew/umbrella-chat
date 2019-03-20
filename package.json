@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/TimtheStew/umbrella-chat#readme",
   "dependencies": {
-    "apollo-server-express": "^1.4.0",
+    "apollo-server-express": "^2.4.8",
     "app-root-path": "^2.1.0",
     "bunyan": "^1.8.12",
     "change-case": "^3.1.0",

@@ -3,7 +3,7 @@ const appRoot = require('app-root-path')
 const config = require('config')
 const _ = require('lodash')
 const { addMockFunctionsToSchema } = require('graphql-tools')
-const ApolloServer = require('apollo-server-express')
+const { ApolloServer } = require('apollo-server-express')
 
 // [Root Schemas]
 const User = require('./User')
@@ -23,8 +23,7 @@ const ChatResolver = require(appRoot + '/server/resolvers/chat.resolver')
 const MessageResolver = require(appRoot + '/server/resolvers/message.resolver')
 
 
-const schema = (ctx) => {
-  let result = new ApolloServer({
+const schema = new ApolloServer({
     logger: {
       log: (msg) => ctx.logger.warn
     },
@@ -46,11 +45,5 @@ const schema = (ctx) => {
       }
     }
   })
-
-  if (config.enableGraphQLMocking) {
-    addMockFunctionsToSchema({ schema: result })
-  }
-  return result
-}
-
+  
 module.exports = schema
