@@ -9,7 +9,7 @@ const MessageFields = `
   chatId: String
 `
 
-const Message = `
+const Message = gql`
   type Message {
     ${MessageFields}
   }

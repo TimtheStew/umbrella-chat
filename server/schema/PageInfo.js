@@ -1,6 +1,6 @@
 'use strict'
 
-const PageInfo = `
+const PageInfo = gql`
   type PageInfo {
     totalCount: Int
     hasNextPage: Boolean

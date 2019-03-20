@@ -15,7 +15,7 @@ const ChatInputFields = `
   updatedAt: String
 `
 
-const Chat = `
+const Chat = gql`
 
   type Chat {
     ${ChatFields}

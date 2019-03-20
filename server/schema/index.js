@@ -2,7 +2,8 @@
 const appRoot = require('app-root-path')
 const config = require('config')
 const _ = require('lodash')
-const { makeExecutableSchema, addMockFunctionsToSchema } = require('graphql-tools')
+const { addMockFunctionsToSchema } = require('graphql-tools')
+const ApolloServer = require('apollo-server-express')
 
 // [Root Schemas]
 const User = require('./User')
@@ -23,7 +24,7 @@ const MessageResolver = require(appRoot + '/server/resolvers/message.resolver')
 
 
 const schema = (ctx) => {
-  let result = makeExecutableSchema({
+  let result = new ApolloServer({
     logger: {
       log: (msg) => ctx.logger.warn
     },
@@ -37,7 +38,13 @@ const schema = (ctx) => {
       UserResolver,
       ChatResolver,
       MessageResolver
-    )
+    ),
+    playground: {
+      endpoint: 'http://localhost:4000/graphql',
+      settings: {
+        'editor.theme' : 'light'
+      }
+    }
   })
 
   if (config.enableGraphQLMocking) {
