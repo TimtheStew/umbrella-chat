@@ -6,7 +6,7 @@ const {generateOrderByEnum, fieldsToCondition} = require('./schemaHelper')
 
 const MessageFields = `
   id: ID
-  body: String
+  body: [String]
   author: User
   chatId: String
 `
