@@ -10,7 +10,7 @@ module.exports = {
           primaryKey: true,
           type: Sequelize.UUID
         },
-        body: Sequelize.ARRAY(Sequelize.JSON),
+        body: Sequelize.ARRAY(Sequelize.STRING(2048)),
         authorId: {
           type: Sequelize.UUID,
           allowNull: false,

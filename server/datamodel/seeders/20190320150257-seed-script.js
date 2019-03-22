@@ -3,12 +3,10 @@
 const Promise = require('bluebird')
 const _ = require('lodash')
 const casual = require('casual')
-const uuid = require(uuid/v4)
+const uuid = require('uuid/v4')
 const {times, sample, range, sampleSize} = require('lodash')
 const nodeRSA = require('node-rsa')
 const fs = require('fs')
-
-
 
 /* this array is saved as seed-keys.json
 keypairs = [ { 
@@ -31,9 +29,9 @@ let chats = []
 module.exports = {
   up: async(queryInterface, Sequelize) => {
     return Promise.reduce([
-      await queryInterface.bulkinsert('Users', generateUsers(20)),
-      await queryInterface.bulkinsert('Chats', generateChats(80)),
-      await queryInterface.bulkinsert('Messages', generateMessages(200))
+      await queryInterface.bulkInsert('Users', generateUsers(5)),
+      await queryInterface.bulkInsert('Chats', generateChats(10)),
+      await queryInterface.bulkInsert('Messages', generateMessages(40))
     ], () => {})
   },
 
@@ -65,7 +63,7 @@ let generateUsers = (number) => {
       lastName: casual.last_name,
       displayName: casual.username,
       emailAddress: casual.email,
-      imageURL: casual.url,
+      imageUrl: casual.url,
       accessToken: casual.uuid,
       createdAt: date,
       updatedAt: date
@@ -79,6 +77,7 @@ let generateUsers = (number) => {
     keypairs.push(keypair)
     users.push(user)
 
+    console.log("user")
     return user
   })
 }
@@ -86,16 +85,20 @@ let generateUsers = (number) => {
 let generateChats = (number) => {
   return times(number, () => { 
     let date = new Date().toISOString()
-
+    let userStrings = []
+    //a chat is either 2 people or 2-8 people
+    let chatUsers = sampleSize(userDatas, casual.integer(2,casual.coin_flip ? 2 : 8))
+    chatUsers.forEach(user => {userStrings.push(JSON.stringify(user))})
     let chat = {
       id: uuid(),
       name: casual.title,
       //either 2 person or 2-8 person chat
-      users: JSON.stringify(sampleSize(userDatas, casual.integer(2,casual.coin_flip ? 2 : 8))),
+      users: userStrings,
       createdAt: date,
       updatedAt: date
     }
     chats.push(chat)
+    console.log("chat")
     return chat
   })
 }
@@ -124,6 +127,7 @@ let generateMessages = (number) => {
       chatId: chat.id,
       authorId: sample(users).id,
     }
+    console.log("message")
     return message
   })
 }
