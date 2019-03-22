@@ -10,6 +10,6 @@ umbrella chat
 `npm run watch`
 
 ### Run client
-`npm run client-start`
+`npm run start`
 or
-`npm run client-build`
+`npm run build`
