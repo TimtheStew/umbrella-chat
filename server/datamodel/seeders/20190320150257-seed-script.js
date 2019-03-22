@@ -30,8 +30,8 @@ module.exports = {
   up: async(queryInterface, Sequelize) => {
     return Promise.reduce([
       await queryInterface.bulkInsert('Users', generateUsers(5)),
-      await queryInterface.bulkInsert('Chats', generateChats(10)),
-      await queryInterface.bulkInsert('Messages', generateMessages(40))
+      await queryInterface.bulkInsert('Chats', generateChats(10), {}, { users : { type: new Sequelize.ARRAY(new Sequelize.JSON)}}),
+      await queryInterface.bulkInsert('Messages', generateMessages(40), {}, {body: {type: new Sequelize.ARRAY(new Sequelize.JSON)}})
     ], () => {})
   },
 
@@ -50,8 +50,8 @@ let generateUsers = (number) => {
     let id = uuid()
     let keypair = {
       user: id,
-      private: key.exportKey('pkcs1-private'),
-      public: key.exportKey('pkcs1-public')
+      private: key.exportKey('pkcs8-private'),
+      public: key.exportKey('pkcs8-public')
     }
 
     let date = new Date().toISOString()
@@ -77,7 +77,6 @@ let generateUsers = (number) => {
     keypairs.push(keypair)
     users.push(user)
 
-    console.log("user")
     return user
   })
 }
@@ -85,49 +84,47 @@ let generateUsers = (number) => {
 let generateChats = (number) => {
   return times(number, () => { 
     let date = new Date().toISOString()
-    let userStrings = []
     //a chat is either 2 people or 2-8 people
     let chatUsers = sampleSize(userDatas, casual.integer(2,casual.coin_flip ? 2 : 8))
-    chatUsers.forEach(user => {userStrings.push(JSON.stringify(user))})
+    chatUsers.toString = function(){return JSON.stringify(this)}
     let chat = {
       id: uuid(),
       name: casual.title,
-      //either 2 person or 2-8 person chat
-      users: userStrings,
+      users: chatUsers,
       createdAt: date,
       updatedAt: date
     }
     chats.push(chat)
-    console.log("chat")
     return chat
   })
 }
 
 let generateMessages = (number) => {
   return times(number, () => {
+    let date = new Date().toISOString()
     let msgText = casual.sentences(casual.integer(1,10))
     let chat = sample(chats)
     let chatUsers = JSON.parse(chat.users)
     let msgBody = []
+    //msgBody.toString = function(){return JSON.stringify(this)}
     let key = new nodeRSA()
     //encrypt for each user
     chatUsers.forEach(user => {
-      key.importKey(user.publicKey, 'pkcs8')
-      encryptedMsg = key.encrypt(msgText)
-      msgBody.push(
-        JSON.stringify({
-          userId: user.id,
-          message: encryptedMsg
-        })
-      )
+      key.importKey(user.publicKey, 'pkcs8-public')
+      let encryptedMsg = key.encrypt(msgText, 'base64')
+      msgBody.push({
+        userId: user.id,
+        message: encryptedMsg
+      })
     });
     let message = {
       id: uuid(),
       body: msgBody,
       chatId: chat.id,
       authorId: sample(users).id,
+      createdAt: date,
+      updatedAt: date
     }
-    console.log("message")
     return message
   })
 }

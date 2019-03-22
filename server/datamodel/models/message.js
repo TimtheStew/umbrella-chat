@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.UUID
     },
-    body: DataTypes.ARRAY(DataTypes.STRING),
+    body: DataTypes.ARRAY(DataTypes.JSON),
     chatId: DataTypes.STRING,
     createdAt: {
       type: DataTypes.DATE,
