@@ -106,7 +106,7 @@ let generateMessages = (number) => {
     let chat = sample(chats)
     let chatUsers = JSON.parse(chat.users)
     let msgBody = []
-    //msgBody.toString = function(){return JSON.stringify(this)}
+    msgBody.toString = function(){return JSON.stringify(this)}
     let key = new nodeRSA()
     //encrypt for each user
     chatUsers.forEach(user => {
